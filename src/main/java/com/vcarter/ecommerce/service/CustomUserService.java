@@ -28,12 +28,11 @@ public class CustomUserService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(
                 user.getUsername(),
                 user.getPassword(),
-                Collections.singletonList(new SimpleGrantedAuthority(user.getRole().toString()))
-        );
+                Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole().toString())));
     }
 
-    public User registerUser (String username, String email, String password, String address, String phoneNumber) {
-        var user=new User();
+    public User registerUser(String username, String email, String password, String address, String phoneNumber) {
+        var user = new User();
         user.setUsername(username);
         user.setEmail(email);
         user.setPassword(passwordEncoder.encode(password));
